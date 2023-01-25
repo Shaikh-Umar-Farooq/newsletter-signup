@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const bodypaser = require("body-parser");
 const request = require("request");
@@ -8,6 +10,7 @@ const { send } = require("process");
 
 const app = express();
 
+console.log("toke",process.env.TOKEN);
 app.use(express.static("public"));
 app.use(bodypaser.urlencoded({ extended: true }));
 
@@ -39,7 +42,7 @@ app.post("/", function (req, res) {
     const url = " https://us14.api.mailchimp.com/3.0/lists/7df2ae3459"
     const options = {
         method: "POST",
-        auth: "umar1:aab5dcc7d4bab155b099b8588c5d28de-us14"
+        auth: process.env.TOKEN
     }
     const request = http.request(url, options, function (response) {
         if( response.statusCode === 200){
@@ -47,7 +50,7 @@ app.post("/", function (req, res) {
         }
 
         else {
-            res.sendFile(__dirname+"/success.html")
+            res.sendFile(__dirname+"/failure.html")
 
         }
 
