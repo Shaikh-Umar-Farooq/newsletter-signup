@@ -9,8 +9,6 @@ const { send } = require("process");
 
 
 const app = express();
-
-console.log("toke",process.env.TOKEN);
 app.use(express.static("public"));
 app.use(bodypaser.urlencoded({ extended: true }));
 
